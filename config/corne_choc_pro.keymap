@@ -7,13 +7,77 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/rgb.h>
 
 / {
     chosen { zmk,physical-layout = &default_layout; };
 };
 
 / {
+    behaviors {
+        bracket_L: bracket_L {
+            compatible = "zmk,behavior-mod-morph";
+            label = "BRACKET_L";
+            bindings = <&kp LEFT_BRACKET>, <&kp LEFT_BRACE>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_RSFT|MOD_LSFT)>;
+        };
+
+        bracket_R: bracket_R {
+            compatible = "zmk,behavior-mod-morph";
+            label = "BRACKET_R";
+            bindings = <&kp RIGHT_BRACKET>, <&kp RIGHT_BRACE>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_RSFT|MOD_LSFT)>;
+        };
+
+        parentheses_L: parentheses_L {
+            compatible = "zmk,behavior-mod-morph";
+            label = "PARENTHESES_L";
+            bindings = <&kp LEFT_PARENTHESIS>, <&kp LESS_THAN>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_RSFT|MOD_LSFT)>;
+        };
+
+        parentheses_R: parentheses_R {
+            compatible = "zmk,behavior-mod-morph";
+            label = "PARENTHESES_R";
+            bindings = <&kp RIGHT_PARENTHESIS>, <&kp GREATER_THAN>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_RSFT|MOD_LSFT)>;
+        };
+
+        plus_minus: plus_minus {
+            compatible = "zmk,behavior-mod-morph";
+            label = "PLUS_MINUS";
+            bindings = <&kp PLUS>, <&kp MINUS>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        undscr_bckslsh: undscr_bckslsh {
+            compatible = "zmk,behavior-mod-morph";
+            label = "UNDSCR_BCKSLSH";
+            bindings = <&kp UNDERSCORE>, <&kp BACKSLASH>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        EQ_PIPE: EQ_PIPE {
+            compatible = "zmk,behavior-mod-morph";
+            label = "EQ_PIPE";
+            bindings = <&kp EQUAL>, <&kp PIPE>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -27,10 +91,10 @@
             //                    | GUI | LWR | SPC |               | ENT | RSE  | ALT |
 
             bindings = <
-&kp TAB    &kp Q  &kp W  &kp E      &kp R    &kp T        &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp Y        &kp U          &kp I      &kp O    &kp P     &kp BSPC
-&kp LCTRL  &kp A  &kp S  &kp D      &kp F    &kp G        &kp LALT          &kp RALT           &kp H        &kp J          &kp K      &kp L    &kp SEMI  &kp SQT
-&kp LSHFT  &kp Z  &kp X  &kp C      &kp V    &kp B                                             &kp N        &kp M          &kp COMMA  &kp DOT  &kp FSLH  &kp ESC
-                         &kp LCTRL  &kp ESC  &lt 1 SPACE                                       &lt 2 ENTER  &kp BACKSPACE  &kp DEL
+&kp TAB      &kp Q  &kp W  &kp E      &kp R    &kp T        &parentheses_L  &parentheses_R  &kp Y        &kp U          &kp I      &kp O    &kp P     &EQ_PIPE
+&plus_minus  &kp A  &kp S  &kp D      &kp F    &kp G        &bracket_L      &bracket_R      &kp H        &kp J          &kp K      &kp L    &kp SEMI  &kp SQT
+&kp LSHFT    &kp Z  &kp X  &kp C      &kp V    &kp B                                        &kp N        &kp M          &kp COMMA  &kp DOT  &kp FSLH  &kp ESC
+                           &kp LCTRL  &kp ESC  &lt 1 ENTER                                  &lt 2 SPACE  &kp BACKSPACE  &kp DEL
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp PG_UP PG_DN &inc_dec_kp C_PREV C_NEXT &inc_dec_kp C_BRI_DN C_BRI_UP>;
@@ -46,10 +110,10 @@
             //                    | GUI |     | SPC   |        | ENT   |     | ALT |
 
             bindings = <
-&kp TAB    &kp N1        &kp N2           &kp N3        &kp N4        &kp N5          &kp LCTRL  &kp RCTRL  &kp N6    &kp N7    &kp N8     &kp N9     &kp N0  &kp BSPC
-&kp LCTRL  &bt BT_SEL 0  &bt BT_SEL 1     &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &kp LALT   &kp RALT   &kp LEFT  &kp DOWN  &kp UP     &kp RIGHT  &trans  &trans
-&kp LSHFT  &bt BT_CLR    &rgb_ug RGB_TOG  &sys_reset    &bootloader   &studio_unlock                        &trans    &trans    &trans     &trans     &trans  &trans
-                                          &kp LGUI      &trans        &kp SPACE                             &kp LGUI  &trans    &kp SPACE
+&kp TAB    &kp N1        &kp NUMBER_1  &kp N2    &kp N3       &kp N5          &kp LCTRL  &kp RCTRL  &kp N6     &kp N7  &kp N8     &kp N9  &kp PLUS   &kp BSPC
+&kp LCTRL  &bt BT_SEL 0  &kp N4        &kp N5    &kp N6       &bt BT_SEL 4    &kp LALT   &kp RALT   &kp LEFT   &kp N4  &kp N5     &kp N6  &kp MINUS  &trans
+&kp LSHFT  &bt BT_CLR    &kp N7        &kp N8    &bootloader  &studio_unlock                        &kp N0     &kt N1  &kt N2     &kp N3  &trans     &trans
+                                       &kp LGUI  &trans       &kp ENTER                             &kp SPACE  &trans  &kp SPACE
             >;
         };
 
@@ -70,7 +134,7 @@
             >;
         };
 
-        extra_layer_1 {
+        shft {
             display-name = "EXTRA 1";
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
