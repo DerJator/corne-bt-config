@@ -52,10 +52,10 @@
             mods = <(MOD_RSFT|MOD_LSFT)>;
         };
 
-        plus_minus: plus_minus {
+        minus_plus: minus_plus {
             compatible = "zmk,behavior-mod-morph";
-            label = "PLUS_MINUS";
-            bindings = <&kp PLUS>, <&kp MINUS>;
+            label = "MINUS_PLUS";
+            bindings = <&kp MINUS>, <&kp PLUS>;
 
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
@@ -130,6 +130,15 @@
             hold-trigger-key-positions = <7 12 13 21 22 23 24 25 26 27 34 35 36 37 38 39 43 44 45 8 9 10 11>;
             flavor = "tap-preferred";
         };
+
+        slash_asterisk: slash_asterisk {
+            compatible = "zmk,behavior-mod-morph";
+            label = "SLASH_ASTERISK";
+            bindings = <&kp SLASH>, <&kp ASTERISK>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
     };
 
     combos {
@@ -175,10 +184,10 @@
             //                    | GUI | LWR | SPC |               | ENT | RSE  | ALT |
 
             bindings = <
-&kp TAB      &kp Q  &kp W  &kp E              &kp R                     &kp T        &parentheses_L  &parentheses_R  &kp Y        &kp U                 &kp I              &kp O    &kp P     &EQ_PIPE
-&plus_minus  &kp A  &kp S  &hm_mod_L LCTRL D  &hm_shift_L LEFT_SHIFT F  &kp G        &bracket_L      &bracket_R      &kp H        &hm_shift_R RSHIFT J  &hm_mod_R RCTRL K  &kp L    &kp SEMI  &kp SQT
-&kp LSHFT    &kp Z  &kp X  &kp C              &kp V                     &kp B                                        &kp N        &kp M                 &kp COMMA          &kp DOT  &kp FSLH  &undscr_bckslsh
-                           &kp LCTRL          &mt LEFT_ALT ESC          &lt 1 ENTER                                  &lt 2 SPACE  &kp BACKSPACE         &kp DEL
+&kp TAB      &kp Q    &kp W  &kp E              &kp R                     &kp T        &parentheses_L  &parentheses_R  &kp Y        &kp U                    &kp I              &kp O    &kp P     &EQ_PIPE
+&minus_plus  &lt 4 A  &kp S  &hm_mod_L LCTRL D  &hm_shift_L LEFT_SHIFT F  &kp G        &bracket_L      &bracket_R      &kp H        &hm_shift_R RSHIFT J     &hm_mod_R RCTRL K  &lt 5 L  &kp SEMI  &kp SQT
+&kp LSHFT    &kp Z    &kp X  &kp C              &kp V                     &kp B                                        &kp N        &kp M                    &kp COMMA          &kp DOT  &kp FSLH  &undscr_bckslsh
+                             &kp LCTRL          &mt LEFT_ALT ESC          &lt 1 ENTER                                  &lt 2 SPACE  &mt LEFT_META BACKSPACE  &kp DEL
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp PG_UP PG_DN &inc_dec_kp C_PREV C_NEXT &inc_dec_kp C_BRI_DN C_BRI_UP>;
@@ -194,10 +203,10 @@
             //                    | GUI |     | SPC   |        | ENT   |     | ALT |
 
             bindings = <
-&kp TAB    &kp N1           &kp NUMBER_1  &kp N2    &kp N3  &kp N5          &kp LCTRL  &kp RCTRL  &kp N6     &kp N7  &kp N8     &kp N9  &kp KP_MINUS  &kp BSPC
-&kp LCTRL  &rgb_ug RGB_EFF  &kp N4        &kp N5    &kp N6  &bt BT_SEL 4    &kp LALT   &kp RALT   &kp LEFT   &kp N4  &kp N5     &kp N6  &kp PLUS      &kp GRAVE
-&kp LSHFT  &bl BL_CYCLE     &kp N7        &kp N8    &kp N9  &studio_unlock                        &kp N0     &kp N1  &kp N2     &kp N3  &trans        &trans
-                                          &kp LGUI  &trans  &kp ENTER                             &kp SPACE  &trans  &kp SPACE
+&kp TAB    &kp N1           &kp NUMBER_1  &kp N2    &kp N3  &kp N5          &kp LCTRL  &kp RCTRL  &kp N6        &kp N7        &kp N8     &kp N9  &kp KP_MINUS     &kp BSPC
+&kp LCTRL  &rgb_ug RGB_EFF  &kp N4        &kp N5    &kp N6  &bt BT_SEL 4    &kp LALT   &kp RALT   &kp NUMBER_3  &kp N4        &kp N5     &kp N6  &kp PLUS         &kp GRAVE
+&kp LSHFT  &bl BL_CYCLE     &kp N7        &kp N8    &kp N9  &studio_unlock                        &kp N0        &kp N1        &kp N2     &kp N3  &slash_asterisk  &trans
+                                          &kp LGUI  &trans  &kp ENTER                             &kp NUMBER_0  &kp NUMBER_0  &kp SPACE
             >;
         };
 
@@ -228,23 +237,23 @@
             >;
         };
 
-        extra_layer_2 {
-            display-name = "EXTRA 2";
+        navigation {
+            display-name = "NAVIGATION";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans                  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans    &trans  &trans     &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans    &trans    &trans  &trans     &trans  &trans
+                        &trans  &trans  &trans                  &trans    &trans    &trans
             >;
         };
 
-        extra_layer_3 {
+        scrolling {
             display-name = "EXTRA 3";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans                  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans         &trans       &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp PAGE_DOWN  &kp PAGE_UP  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans         &trans       &trans  &trans  &trans
+                        &trans  &trans  &trans                  &trans  &trans         &trans
             >;
         };
 
