@@ -147,10 +147,9 @@
             bindings = <&kp>, <&kp>;
 
             #binding-cells = <2>;
-            tapping-term-ms = <300>;
+            tapping-term-ms = <250>;
             hold-trigger-key-positions = <0 1 2 3 4 5 6 14 15 16 17 18 19 20 28 29 30 31 32 33 40 41 42>;
-            hold-trigger-on-release;
-            flavor = "balanced";
+            flavor = "tap-preferred";
         };
 
         hm_meta_L: hm_meta_L {
